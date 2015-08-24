@@ -1,10 +1,13 @@
 a.social-btn {
+   position: relative;
+   top: 10px;
+   font-family: Raleway;
+   text-shadow: 3px;
    border-style: solid;
    border-width: 5px;
-   margin: 5px 5px 5px 5px;
-   padding: 5px 5px 5px 5px;
-}
-
-h1 {
-  color: red;
+   margin: 8px;
+   padding: 10px;
+   text-decoration-color: black;
+   text-decoration: none;
+   background-color: #add8e6;
 }
