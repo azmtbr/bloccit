@@ -22,6 +22,12 @@ posts = Post.all
     )
   end
 
+  50.times do
+  Advertisement.create!(title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: rand(1..1000))
+  end
+
+Advertisement.find_or_create_by(title: 'Do you want to advertise ads?', copy: 'It is the most rediculous job in the world', price: 1)
+
 Post.find_or_create_by(title: 'This is my unique title.', body: 'This is the body of my unique post')
 
 Comment.find_or_create_by(post_id: 'This is the comment on my unique post')
@@ -31,3 +37,4 @@ Comment.find_or_create_by(post_id: 'This is the comment on my unique post')
   puts "Seed finished"
   puts "#{Post.count} posts created"
   puts "#{Comment.count} comments created"
+  puts "#{Advertisement.count} ads created"
