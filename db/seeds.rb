@@ -26,6 +26,12 @@ posts = Post.all
   Advertisement.create!(title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: rand(1..1000))
   end
 
+  50.times do
+  Question.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: rand(0..1))
+end
+
+Question.find_or_create_by(title: 'I have the perfect question', body: 'why?', resolved: 1)
+
 Advertisement.find_or_create_by(title: 'Do you want to advertise ads?', copy: 'It is the most rediculous job in the world', price: 1)
 
 Post.find_or_create_by(title: 'This is my unique title.', body: 'This is the body of my unique post')
@@ -38,3 +44,4 @@ Comment.find_or_create_by(post_id: 'This is the comment on my unique post')
   puts "#{Post.count} posts created"
   puts "#{Comment.count} comments created"
   puts "#{Advertisement.count} ads created"
+  puts "#{Question.count} questions created"
