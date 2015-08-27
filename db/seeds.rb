@@ -42,6 +42,12 @@ posts = Post.all
   Question.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: rand(0..1))
 end
 
+  #create sponsored posts
+  10.times do
+    SponsoredPost.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, price: rand(1..25))
+  end
+
+SponsoredPost.find_or_create_by(title: 'I would like one billion dollars', body: 'I think I deserve it.', price: 1000000000)
 
 Topic.find_or_create_by(name: 'The most great topic', description: 'To describe this topic would be redundant')
 
@@ -60,4 +66,5 @@ Comment.find_or_create_by(post_id: 'This is the comment on my unique post')
   puts "#{Post.count} posts created"
   puts "#{Comment.count} comments created"
   puts "#{Advertisement.count} ads created"
+  puts "#{SponsoredPost.count} sponsored posts created"
   puts "#{Question.count} questions created"
