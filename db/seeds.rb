@@ -1,11 +1,21 @@
 include RandomData
 
+#create topics
+15.times do
+  Topic.create!(
+  name:          RandomData.random_sentence,
+  description:   RandomData.random_paragraph
+  )
+ end
+ topics = Topic.all
+
 #create posts
 50.times do
   #use create! with a bang (!).
   #Adding a ! instructs the method to raise an error if there's a problem with the data being seeded.
   Post.create!(
   #use methods from a class that does not exist yet, RandomData, that will create random strings for title and body.
+    topic: topics.sample,
     title: RandomData.random_sentence,
     body:  RandomData.random_paragraph
   )
@@ -22,13 +32,18 @@ posts = Post.all
     )
   end
 
+  #create ads
   50.times do
   Advertisement.create!(title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: rand(1..1000))
   end
 
+  #create  questions
   50.times do
   Question.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: rand(0..1))
 end
+
+
+Topic.find_or_create_by(name: 'The most great topic', description: 'To describe this topic would be redundant')
 
 Question.find_or_create_by(title: 'I have the perfect question', body: 'why?', resolved: 1)
 
@@ -41,6 +56,7 @@ Comment.find_or_create_by(post_id: 'This is the comment on my unique post')
 
 
   puts "Seed finished"
+  puts "#{Topic.count} topics created"
   puts "#{Post.count} posts created"
   puts "#{Comment.count} comments created"
   puts "#{Advertisement.count} ads created"

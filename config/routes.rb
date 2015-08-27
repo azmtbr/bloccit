@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 
   #call the resources method, and pass it a Symbol.
   #This instructs Rails to create post routes for creating, updating, viewing, and deleting instances of Post.
-  resources :posts
+  resources :topics do
+    resources :posts, except: [:index]
+  end
+  
   resources :advertisements
   resources :questions
 
