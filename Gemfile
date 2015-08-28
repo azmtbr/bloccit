@@ -30,3 +30,7 @@ source 'https://rubygems.org'
  gem 'turbolinks'
 
  gem 'bootstrap-sass'
+
+ # Used for excrypting User passwords
+ gem 'bcrypt'
+ 
