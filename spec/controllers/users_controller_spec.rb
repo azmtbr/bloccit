@@ -5,7 +5,7 @@ RSpec.describe UsersController, type: :controller do
   let (:new_user_attributes) do
     {
       user: {
-        name: "BlocHead",
+        name: "Blochead",
         email: "blochead@bloc.io",
         password: "blochead",
         password_confirmation: "blochead"
@@ -59,6 +59,11 @@ RSpec.describe UsersController, type: :controller do
        post :create, user: new_user_attributes
        expect(assigns(:user).password_confirmation).to eq new_user_attributes[:password_confirmation]
      end
+
+    it "logs the user in after sign up" do
+      post :create, user: new_user_attributes
+      expect(session[:user_id]).to eq assigns(:user).id
+    end
   end
 
   describe "POST confirm" do
