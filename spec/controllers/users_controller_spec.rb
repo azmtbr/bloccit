@@ -33,9 +33,10 @@ RSpec.describe UsersController, type: :controller do
      end
 
     it "creates a new user" do
+
        expect{
          post :create, user: new_user_attributes
-       }.to change(User, :count).by(1)
+       }.to change(User,:count).by(1)
      end
 
     it "sets user name properly" do
@@ -58,4 +59,11 @@ RSpec.describe UsersController, type: :controller do
        expect(assigns(:user).password_confirmation).to eq new_user_attributes[:password_confirmation]
      end
   end
+
+  describe "POST confirm" do
+    it "returns http success" do
+       post :create, user: new_user_attributes
+       expect(response).to have_http_status(:success)
+     end
+   end
 end

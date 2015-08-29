@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   #remove get "welcome/index" because we've declared the index view as the root view.
   #We also modify the about route to allow users to type /about, rather than /welcome/about.
+  post 'users/confirm' => 'users#confirm'
 
   get 'about' => 'welcome#about'
 
