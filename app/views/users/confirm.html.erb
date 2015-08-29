@@ -7,6 +7,19 @@
       <p>Name: <%= @user.name %></p>
       <p>Email: <%= @user.email %></p>
 
+        <%= f.hidden_field :name, autofocus: true, class: 'form-control', placeholder: "Enter name" %>
+
+
+        <%= f.hidden_field :email, class: 'form-control', placeholder: "Enter email" %>
+
+
+
+        <%= f.hidden_field :password, class: 'form-control', placeholder: "Enter password" %>
+
+
+
+        <%= f.hidden_field :password_confirmation, class: 'form-control', placeholder: "Enter password confirmation" %>
+    
       <div class="form-group">
         <%= f.submit "Yes", class: 'btn btn-success' %>
         <%= link_to "No", new_user_path, class: 'btn btn-default' %>

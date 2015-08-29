@@ -10,7 +10,9 @@ source 'https://rubygems.org'
 
  group :development do
    gem 'sqlite3'
-   gem 'pry-rails'
+
+   gem 'better_errors'
+   
  end
 
  group :development, :test do
@@ -33,4 +35,3 @@ source 'https://rubygems.org'
 
  # Used for excrypting User passwords
  gem 'bcrypt'
- 
