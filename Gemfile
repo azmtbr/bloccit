@@ -12,7 +12,7 @@ source 'https://rubygems.org'
    gem 'sqlite3'
 
    gem 'better_errors'
-   
+
 
  end
 

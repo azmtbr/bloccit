@@ -5,6 +5,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
+    @posts = @topic.posts
   end
 
   def new
@@ -13,9 +14,9 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(topic_params)
-    
+
     if @topic.save
-      redirect_to @topic, notice: 'Topic was successfully saved'
+      redirect_to @topic, notice: "Topic was successfully saved."
 
     else
       flash[:error] = "Error creating topic. Please try again."
