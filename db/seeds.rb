@@ -1,5 +1,15 @@
 include RandomData
 
+#Create Users
+5.times do
+  user = User.create!(
+  name: RandomData.random_name,
+  email: RandomData.random_email,
+  password: RandomData.random_sentence
+  )
+end
+users = User.all 
+
 #create topics
 15.times do
   Topic.create!(
@@ -15,6 +25,7 @@ include RandomData
   #Adding a ! instructs the method to raise an error if there's a problem with the data being seeded.
   Post.create!(
   #use methods from a class that does not exist yet, RandomData, that will create random strings for title and body.
+    user: users.sample,
     topic: topics.sample,
     title: RandomData.random_sentence,
     body:  RandomData.random_paragraph
@@ -59,9 +70,16 @@ Post.find_or_create_by(title: 'This is my unique title.', body: 'This is the bod
 
 Comment.find_or_create_by(post_id: 'This is the comment on my unique post')
 
+user = User.first
+ user.update_attributes!(
+   email: 'jmalis@live.com',
+   password: 'helloworld'
+ )
+
 
 
   puts "Seed finished"
+  puts "#{User.count} users created"
   puts "#{Topic.count} topics created"
   puts "#{Post.count} posts created"
   puts "#{Comment.count} comments created"

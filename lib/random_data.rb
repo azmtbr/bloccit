@@ -2,6 +2,16 @@
 #Modules help keep common functions organized and reusable throughout our application.
 module RandomData
 
+  def random_name
+     first_name = random_word.capitalize
+     last_name = random_word.capitalize
+     "#{first_name} #{last_name}"
+   end
+
+   def random_email
+     "#{random_word}@#{random_word}.#{random_word}"
+   end
+
 #define random_paragraph. We set sentences to an array. We create four to six random sentences and append them to sentences.
 #We call join on sentences to combine each sentence in the array, passing a space () which will separate each sentence. join combines each sentence into a full paragraph (as a string).
   def random_paragraph

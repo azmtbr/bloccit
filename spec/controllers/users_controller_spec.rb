@@ -4,12 +4,10 @@ RSpec.describe UsersController, type: :controller do
   #create a hash of attributes named new_user_attributes to use in our specs so we can use them easily throughout our spec.
   let (:new_user_attributes) do
     {
-      user: {
-        name: "Blochead",
+      name: "Blochead",
         email: "blochead@bloc.io",
         password: "blochead",
         password_confirmation: "blochead"
-      }
     }
   end
 
@@ -31,12 +29,13 @@ RSpec.describe UsersController, type: :controller do
   describe "POST create" do
      it "returns http success" do
        post :create, user: new_user_attributes
-       expect(response).to have_http_status(:success)
+       expect(response).to have_http_status(:redirect)
      end
 
     it "creates a new user" do
+
        expect{
-         post :create, user: new_user_attributes
+         post :create, user: {name: "Blocy", email: "jon@example.com", password: "password", password_confirmation: "password"}
        }.to change(User,:count).by(1)
      end
 

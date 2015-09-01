@@ -9,10 +9,12 @@ RSpec.describe Question, type: :model do
   }
 
   context 'attributes' do
-    expect(question).to respond_to(:body)
-  end
+    it "should respond to body" do
+      expect(question).to respond_to(:body)
+    end
 
     it "should respond to resolved" do
       expect(question).to respond_to(:resolved)
     end
+  end
 end

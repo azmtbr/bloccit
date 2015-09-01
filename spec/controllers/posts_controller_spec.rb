@@ -1,12 +1,100 @@
 require 'rails_helper'
 include RandomData
+#add SessionsHelper so that we can use the create_session(user) method later in the spec.
+include SessionsHelper
 
 RSpec.describe PostsController, type: :controller do
 
+  let (:my_user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld")}
+
   let (:my_topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)}
 
-  let (:my_post) { my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph)}
+  let (:my_post) { my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: my_user)}
 
+  #add a context for a guest (un-signed-in) user. Contexts organize tests based on the state of an object.
+context "guest user" do
+  #define the show tests, which allow guests to views posts in Bloccit.
+  describe "GET show" do
+    it "returns http success" do
+      get :show, topic_id: my_topic.id, id: my_post.id
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders the #show view" do
+      get :show, topic_id: my_topic.id, id: my_post.id
+      expect(response).to render_template :show
+    end
+
+    it "assigns my_post to @post" do
+      get :show, topic_id: my_topic.id, id: my_post.id
+      expect(assigns(:post)).to eq(my_post)
+    end
+  end
+
+  describe "GET new" do
+    it "returns http redirect" do
+      get :new, topic_id: my_topic.id
+      expect(response).to redirect_to(new_session_path)
+    end
+  end
+
+  describe "POST create" do
+    it "returns http redirect" do
+      post :create, topic_id: my_topic.id, post: {title: RandomData.random_sentence, body: random_paragraph}
+      expect(response).to redirect_to(new_session_path)
+    end
+  end
+
+  describe "GET edit" do
+    it "returns http redirect" do
+      get :edit, topic_id: my_topic.id, id: my_post.id
+      expect(response).to redirect_to(new_session_path)
+    end
+  end
+
+  describe "PUT update" do
+    it "returns http redirect" do
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
+
+      put :update, topic_id: my_topic.id, id: my_post.id, post: {title: RandomData.random_sentence, body: random_paragraph}
+      expect(response).to redirect_to(new_session_path)
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "returns http redirect" do
+      delete :destroy, topic_id: my_topic.id, id: my_post.id
+      expect(response).to have_http_status(:redirect)
+    end
+  end
+end
+
+context "signed-in user" do
+  before do
+    create_session(my_user)
+  end
+
+
+  describe "GET show" do
+    it "returns http success" do
+      get :show, topic_id: my_topic.id, id: my_post.id
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders the #show view" do
+      #we expect the response to return the show view using the render_template matcher.
+      get :show, topic_id: my_topic.id, id: my_post.id
+      expect(response).to render_template :show
+    end
+
+    it "assigns my_post to @post" do
+      get :show, topic_id: my_topic.id, id: my_post.id
+      #we expect the post to equal my_post because we call show with the id of my_post.
+      #We are testing that the post returned to us, is the post we asked for.
+      expect(assigns(:post)).to eq(my_post)
+    end
+  end
 
 
   #new is invoked, a new and unsaved Post object is created.
@@ -50,30 +138,6 @@ RSpec.describe PostsController, type: :controller do
       expect(response).to redirect_to [my_topic, Post.last]
     end
   end
-
-
-
-  describe "GET show" do
-    it "returns http success" do
-      get :show, topic_id: my_topic.id, id: my_post.id
-      expect(response).to have_http_status(:success)
-    end
-
-    it "renders the #show view" do
-      #we expect the response to return the show view using the render_template matcher.
-      get :show, topic_id: my_topic.id, id: my_post.id
-      expect(response).to render_template :show
-    end
-
-    it "assigns my_post to @post" do
-      get :show, topic_id: my_topic.id, id: my_post.id
-      #we expect the post to equal my_post because we call show with the id of my_post.
-      #We are testing that the post returned to us, is the post we asked for.
-      expect(assigns(:post)).to eq(my_post)
-    end
-  end
-
-
 
 
   describe "GET edit" do
@@ -138,6 +202,7 @@ RSpec.describe PostsController, type: :controller do
       delete :destroy, topic_id: my_topic.id, id: my_post.id
       #we expect to be redirected to the posts index view after a post has been deleted.
       expect(response).to redirect_to my_topic
+      end
     end
   end
 end
