@@ -1,5 +1,21 @@
 include RandomData
 
+
+#Create an admin user
+admin = User.create!(
+  name:    'Admin User',
+  email:   'admin@example.com',
+  password:'helloworld',
+  role:    'admin'
+)
+
+#Create a member
+member = User.create!(
+  name:     'Member User',
+  email:    'member@example.com',
+  password: 'helloworld' 
+)
+
 #Create Users
 5.times do
   user = User.create!(
@@ -8,7 +24,7 @@ include RandomData
   password: RandomData.random_sentence
   )
 end
-users = User.all 
+users = User.all
 
 #create topics
 15.times do

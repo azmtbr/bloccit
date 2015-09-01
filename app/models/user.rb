@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
-  has_many :posts 
+  has_many :posts
 
   before_save  :downcase_email
-
   before_save  :capitalize_name
+  before_save  :enum_role
 
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   NAME_REGEX = /\A[A-Z][a-z]*\b/
@@ -23,11 +23,17 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  enum role: [:member, :admin]
+
   def downcase_email
     self.email = email.downcase
   end
 
   def capitalize_name
     self.name = (self.name.split.each { |s| s.capitalize! }).join(" ")
+  end
+
+  def enum_role
+    self.role ||= :member
   end
 end
