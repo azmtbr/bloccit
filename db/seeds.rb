@@ -14,7 +14,6 @@ member = User.create!(
   name:     'Member User',
   email:    'member@example.com',
   password: 'helloworld'
-  role:     'member'
 )
 
 #Create a moderator
@@ -22,7 +21,6 @@ moderator = User.create!(
   name:     'Moderator User',
   email:    'moderator@example.com',
   password: 'helloworld'
-  role:     'moderator'
 )
 
 #Create Users
@@ -63,6 +61,7 @@ posts = Post.all
   100.times do
     Comment.create!(
     #call sample on the array returned by Post.all, in order to pick a random post to associate each comment with. sample returns a random element from the array every time it's called.
+    user: users.sample,
     post: posts.sample,
     body: RandomData.random_paragraph
     )

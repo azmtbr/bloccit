@@ -1,15 +1,13 @@
 Rails.application.routes.draw do
-
-
-
-
-
-
   #call the resources method, and pass it a Symbol.
   #This instructs Rails to create post routes for creating, updating, viewing, and deleting instances of Post.
   resources :topics do
     resources :posts, except: [:index]
     resources :sponsored_posts, except: [:index]
+  end
+
+  resources :posts, only: [] do
+    resources :comments, only: [:create, :destroy]
   end
 
   resources :users, only: [:new, :create]
