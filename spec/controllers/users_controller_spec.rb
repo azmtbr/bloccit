@@ -4,7 +4,7 @@ RSpec.describe UsersController, type: :controller do
   #create a hash of attributes named new_user_attributes to use in our specs so we can use them easily throughout our spec.
   let (:new_user_attributes) do
     {
-      name: "Blochead",
+        name: "Blochead",
         email: "blochead@bloc.io",
         password: "blochead",
         password_confirmation: "blochead"

@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  enum role: [:member, :admin]
+  enum role: [:member, :admin, :moderator]
 
   def downcase_email
     self.email = email.downcase

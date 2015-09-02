@@ -56,16 +56,21 @@ class PostsController < ApplicationController
    end
 
    def destroy
-     @post = Post.find(params[:id])
+      @post = Post.find(params[:id])
+      if current_user.moderator?
+          flash[:error] = "You are not authorized for that action."
+          redirect_to @post.topic
 
-     #call destroy on @post. If that call is successful, we set a flash message and redirect the user to the posts index view.
-     #If destroy fails then we redirect the user to the show view using render :show.
-     if @post.destroy
-       flash[:notice] = "\"#{@post.title}\" was deleted successfully."
-       redirect_to @post.topic
-     else
-       flash[:error] = "There was an error deleting the post."
-       render :show
+      else
+        #call destroy on @post. If that call is successful, we set a flash message and redirect the user to the posts index view.
+        #If destroy fails then we redirect the user to the show view using render :show.
+        if @post.destroy
+          flash[:notice] = "\"#{@post.title}\" was deleted successfully."
+          redirect_to @post.topic
+        else
+          flash[:error] = "There was an error deleting the post."
+          render :show
+       end
      end
    end
 

@@ -13,7 +13,16 @@ admin = User.create!(
 member = User.create!(
   name:     'Member User',
   email:    'member@example.com',
-  password: 'helloworld' 
+  password: 'helloworld'
+  role:     'member'
+)
+
+#Create a moderator
+moderator = User.create!(
+  name:     'Moderator User',
+  email:    'moderator@example.com',
+  password: 'helloworld'
+  role:     'moderator'
 )
 
 #Create Users
@@ -21,7 +30,7 @@ member = User.create!(
   user = User.create!(
   name: RandomData.random_name,
   email: RandomData.random_email,
-  password: RandomData.random_sentence
+  password: RandomData.random_word
   )
 end
 users = User.all
@@ -88,10 +97,9 @@ Comment.find_or_create_by(post_id: 'This is the comment on my unique post')
 
 user = User.first
  user.update_attributes!(
-   email: 'jmalis@live.com',
-   password: 'helloworld'
+   email: 'monkeydogphotography@gmail.com',
+   password: 'konibear'
  )
-
 
 
   puts "Seed finished"
