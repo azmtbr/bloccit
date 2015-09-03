@@ -10,7 +10,7 @@
 <div class="row">
   <div class="col-md-8">
     <p class="lead"><%= @topic.description %></p>
-    <%= render_posts(@topic.posts) %>
+    <%= render(@topic.posts) %>
     <%= render_posts(@topic.sponsored_posts) %>
   </div>
 
