@@ -1,0 +1,9 @@
+<div class="media">
+   <div class="media-body">
+     <%= @post.title %> <br>
+     <small>
+        submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %>
+     </small>
+     <p><%= post.body %></p>
+   </div>
+ </div>
