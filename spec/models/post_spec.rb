@@ -79,5 +79,12 @@ RSpec.describe Post, type: :model do
          expect(post.rank).to eq (old_rank - 1)
        end
      end
+
+     describe "#auto_upvote" do
+       it "automatically upvotes a new post" do
+         post.auto_upvote
+         expect( post.up_votes ).to eq(1)
+       end
+     end
    end
 end

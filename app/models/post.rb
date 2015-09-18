@@ -1,6 +1,9 @@
 class Post < ActiveRecord::Base
   belongs_to :topic
   belongs_to :user
+
+  after_create :auto_upvote
+
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :labelings, as: :labelable
@@ -34,5 +37,9 @@ class Post < ActiveRecord::Base
     age_in_days = (created_at - Time.new(1970,1,1)) / 1.day.seconds
     new_rank = points + age_in_days
     update_attribute(:rank, new_rank)
+  end
+
+  def auto_upvote
+    user.votes.create!(post: self, value: 1)
   end
 end
