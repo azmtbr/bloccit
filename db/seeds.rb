@@ -46,13 +46,16 @@ users = User.all
 50.times do
   #use create! with a bang (!).
   #Adding a ! instructs the method to raise an error if there's a problem with the data being seeded.
-  Post.create!(
+  post = Post.create!(
   #use methods from a class that does not exist yet, RandomData, that will create random strings for title and body.
     user: users.sample,
     topic: topics.sample,
     title: RandomData.random_sentence,
     body:  RandomData.random_paragraph
   )
+
+  post.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+  rand(1..5).times { post.votes.create!(value: [-1, 1].sample, user: users.sample) }
 end
 posts = Post.all
 
@@ -109,3 +112,4 @@ user = User.first
   puts "#{Advertisement.count} ads created"
   puts "#{SponsoredPost.count} sponsored posts created"
   puts "#{Question.count} questions created"
+  puts "#{Vote.count} votes created"
