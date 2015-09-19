@@ -37,3 +37,5 @@ source 'https://rubygems.org'
 
  # Used for excrypting User passwords
  gem 'bcrypt'
+
+ gem 'figaro', '1.0' 
