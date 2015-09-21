@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
 
   after_create :auto_upvote
+  after_create :create_favorite
 
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
@@ -42,5 +43,12 @@ class Post < ActiveRecord::Base
 
   def auto_upvote
     user.votes.create!(post: self, value: 1)
+  end
+
+  def create_favorite
+    # create a favorite
+    self.favorites.create!(post: self, user: user)
+
+    FavoriteMailer.new_post(user, self).deliver_now
   end
 end

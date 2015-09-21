@@ -8,7 +8,6 @@ class CreateRatings < ActiveRecord::Migration
         t.timestamps
     end
     add_index :ratings, :rateable_id
-    add_foreign_key :rating, :topics
-    add_foreign_key :rating, :posts
+  
   end
 end
