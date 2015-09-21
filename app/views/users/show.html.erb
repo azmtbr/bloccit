@@ -21,7 +21,12 @@
 </div>
 
 <h2>Posts</h2>
-<%= render @user.posts %>
+<%= display_user_posts(@user) %>
 
 <h2>Comments</h2>
-<%= render @user.comments %>
+<%= display_user_comments(@user) %>
+
+
+<%= render partial: "users/favorites", locals: { users: @user.favorites }  %>
+
+<br />
