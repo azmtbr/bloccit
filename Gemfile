@@ -19,6 +19,7 @@ source 'https://rubygems.org'
  group :development, :test do
    gem 'rspec-rails', '~> 3.0'
    gem 'shoulda-matchers'
+   gem 'factory_girl_rails', '~> 4.0'
 
  end
 
@@ -38,4 +39,4 @@ source 'https://rubygems.org'
  # Used for excrypting User passwords
  gem 'bcrypt'
 
- gem 'figaro', '1.0' 
+ gem 'figaro', '1.0'
