@@ -26,7 +26,7 @@ module TopicsHelper
 
   def render_topic_name(topic, link = false)
     output = link ? link_to(topic.name, topic) : topic.name
-    output = "<small>private</small>" unless topic.public?
+    output += "private" unless topic.public?
     output.html_safe
   end
 end
