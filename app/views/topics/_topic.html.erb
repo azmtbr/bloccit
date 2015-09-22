@@ -1,6 +1,6 @@
 <div class="media">
    <div class="media-body">
-     <h3><%= link_to topic.name, topic %></h3>
+     <h3><%= render_topic_name(topic, true) %></h3>
      <small>
        <%= topic.description %>
      </small>

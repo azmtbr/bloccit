@@ -1,4 +1,4 @@
-<h1><%= @topic.name %></h1>
+<h1><%= render_topic_name(@topic) %></h1>
     <p class="lead">
        <%= render partial: "labels/list", locals: { labels: @topic.labels } %>
        <%= render partial: "ratings/list", locals: { rating: @topic.rating } %>
