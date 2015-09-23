@@ -1,1 +1,3 @@
-$('#vote-' <%= @post.id %>).html("<%= @post.points %>");
+puts "Here are the number of votes with this post."
+puts @post.points
+$( '<%= "#post-#{@post.id}.voting" %>').html("<%= render partial: 'votes/voter', locals: { post: @post } %>");

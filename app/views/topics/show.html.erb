@@ -16,7 +16,9 @@
   <br>
   <% @topic.posts.each do |post| %>
       <div class="media">
+        <div id='<%= "post-#{post.id}" %>' class="voting">
         <%= render partial: 'votes/voter', locals: { post: post } %>
+        </div>
         <div class="media-body">
           <h4 class="media-heading">
               <%= link_to post.title, topic_post_path(@topic, post) %>
