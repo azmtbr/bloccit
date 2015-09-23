@@ -1,3 +1,2 @@
-<%= puts "Here are the number of votes with this post." %>
-<%= puts @post.points %>
-$( '<%= "#post-#{@post.id}.voting" %>').html("<%= escape_javascript(render partial: 'votes/voter', locals: { post: @post }) %>");
+$('<%= "#post-#{@post.id}" %>').html("<%= escape_javascript(render partial: 'votes/voter', locals: { post: @post }) %>");
+$('<%= "voting_scorecard" %>').html("<%= escape_javascript(render partial: 'votes/scorecard', locals: { post: @post }) %>");
