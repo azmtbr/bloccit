@@ -10,7 +10,7 @@ class Api::V1::TopicsController < Api::V1::BaseController
 
   def show
     topic = Topic.all
-    render json: topic.to_json, status: 200
+    render json: topic.to_json(include: [:posts]), status: 200
   end
 
   def update
