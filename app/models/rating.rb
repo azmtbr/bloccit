@@ -3,6 +3,7 @@ class Rating < ActiveRecord::Base
 
   has_many :topics
   has_many :posts
+  has_many :ratings
   belongs_to :rateable, polymorphic: true
 
   def self.update_rating(rating_string)
